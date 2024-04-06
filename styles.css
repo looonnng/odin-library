@@ -1,0 +1,40 @@
+.material-symbols-outlined.md-18 { font-size: 18px; }
+.material-symbols-outlined.md-24 { font-size: 24px; }
+.material-symbols-outlined.md-36 { font-size: 36px; }
+.material-symbols-outlined.md-responsive { font-size: 5rem; }
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.nav {
+  background-color: #606c38;
+  padding: 4em;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+}
+
+.logo {
+  color: #fff;
+  font-size: 4rem;
+  text-decoration: none;
+}
+
+.logo__title {
+  margin-left: 1rem;
+}
+
+.logo:visited {
+  color: #fff;
+}
+
