@@ -1,8 +1,6 @@
-.material-symbols-outlined.md-18 { font-size: 18px; }
-.material-symbols-outlined.md-24 { font-size: 24px; }
-.material-symbols-outlined.md-36 { font-size: 36px; }
-.material-symbols-outlined.md-responsive { font-size: 5rem; }
-
+.material-symbols-outlined.logo-responsive {
+  font-size: 5rem;
+}
 
 * {
   margin: 0;
@@ -37,4 +35,3 @@
 .logo:visited {
   color: #fff;
 }
-
