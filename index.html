@@ -21,11 +21,6 @@
             >
             <p class="logo__title">Library</p>
           </a>
-          <!-- <ul class="nav__list">
-          <li class="nav__item"><a href="" class="nav__link"></a></li>
-          <li class="nav__item"><a href="" class="nav__link"></a></li>
-          <li class="nav__item"><a href="" class="nav__link"></a></li>
-        </ul> -->
         </div>
       </nav>
     </header>
@@ -33,6 +28,28 @@
       <section class="main">
         <div class="container">
           <button class="btn-addBook">Add Book</button>
+          <form method="get" class="main__form">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="book-title" />
+            <label for="author">Author</label>
+            <input type="text" name="book-author" id="author" />
+            <label for="pages">Pages</label>
+            <input type="text" name="book-pages" id="pages" />
+            <fieldset>
+              <legend>Have you read the book?</legend>
+              <label for="yes"
+                ><input
+                  type="radio"
+                  name="radio"
+                  id="yes"
+                  value="yes"
+                />Yes</label
+              >
+              <label for="no"
+                ><input type="radio" name="radio" id="no" value="no" />No</label
+              >
+            </fieldset>
+          </form>
         </div>
       </section>
     </main>
