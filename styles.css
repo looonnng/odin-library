@@ -35,3 +35,25 @@
 .logo:visited {
   color: #fff;
 }
+
+.form__item {
+  font-family: system-ui, "Helvetica Neue", sans-serif;
+  font-size: 2rem;
+
+  list-style: none;
+  padding: 1rem 0;
+}
+
+.form__label {
+}
+
+.form__input {
+  width: 100%;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.fieldset__label {
+  font-size: 1.5rem;
+}

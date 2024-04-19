@@ -29,26 +29,56 @@
         <div class="container">
           <button class="btn-addBook">Add Book</button>
           <form method="get" class="main__form">
-            <label for="title">Title</label>
-            <input type="text" id="title" name="book-title" />
-            <label for="author">Author</label>
-            <input type="text" name="book-author" id="author" />
-            <label for="pages">Pages</label>
-            <input type="text" name="book-pages" id="pages" />
-            <fieldset>
-              <legend>Have you read the book?</legend>
-              <label for="yes"
-                ><input
-                  type="radio"
-                  name="radio"
-                  id="yes"
-                  value="yes"
-                />Yes</label
-              >
-              <label for="no"
-                ><input type="radio" name="radio" id="no" value="no" />No</label
-              >
-            </fieldset>
+            <ul class="form__link">
+              <li class="form__item">
+                <label class="form__label" for="title">Title:</label>
+                <input
+                  class="form__input"
+                  type="text"
+                  id="title"
+                  name="book-title"
+                />
+              </li>
+              <li class="form__item">
+                <label class="form__label" for="author">Author:</label>
+                <input
+                  class="form__input"
+                  type="text"
+                  name="book-author"
+                  id="author"
+                />
+              </li>
+              <li class="form__item">
+                <label class="form__label" for="pages">Pages:</label>
+                <input
+                  class="form__input"
+                  type="text"
+                  name="book-pages"
+                  id="pages"
+                />
+              </li>
+              <li class="form__item">
+                <fieldset>
+                  <legend>Have you read the book?</legend>
+                  <label class="fieldset__label" for="yes"
+                    ><input
+                      type="radio"
+                      name="radio"
+                      id="yes"
+                      value="yes"
+                    />Yes</label
+                  >
+                  <label class="fieldset__label" for="no"
+                    ><input
+                      type="radio"
+                      name="radio"
+                      id="no"
+                      value="no"
+                    />No</label
+                  >
+                </fieldset>
+              </li>
+            </ul>
           </form>
         </div>
       </section>
