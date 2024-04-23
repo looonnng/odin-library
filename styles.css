@@ -26,6 +26,8 @@
   color: #fff;
   font-size: 4rem;
   text-decoration: none;
+
+  justify-content: center;
 }
 
 .logo__title {
@@ -37,14 +39,13 @@
 }
 
 .form__item {
-  font-family: system-ui, "Helvetica Neue", sans-serif;
-  font-size: 2rem;
-
   list-style: none;
   padding: 1rem 0;
 }
 
 .form__label {
+  font-family: system-ui, "Helvetica Neue", sans-serif;
+  font-size: 2rem;
 }
 
 .form__input {
@@ -55,5 +56,13 @@
 }
 
 .fieldset__label {
+  display: block;
   font-size: 1.5rem;
+  margin: 1rem;
+}
+
+.addBook {
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
 }

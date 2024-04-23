@@ -27,7 +27,6 @@
     <main>
       <section class="main">
         <div class="container">
-          <button class="btn-addBook">Add Book</button>
           <form method="get" class="main__form">
             <ul class="form__link">
               <li class="form__item">
@@ -52,16 +51,19 @@
                 <label class="form__label" for="pages">Pages:</label>
                 <input
                   class="form__input"
-                  type="text"
+                  type="number"
                   name="book-pages"
                   id="pages"
+                  min="1"
+                  max="9999"
                 />
               </li>
               <li class="form__item">
                 <fieldset>
-                  <legend>Have you read the book?</legend>
+                  <legend class="form__label">Have you read the book?</legend>
                   <label class="fieldset__label" for="yes"
                     ><input
+                      class="reading"
                       type="radio"
                       name="radio"
                       id="yes"
@@ -70,6 +72,7 @@
                   >
                   <label class="fieldset__label" for="no"
                     ><input
+                      class="reading"
                       type="radio"
                       name="radio"
                       id="no"
@@ -78,6 +81,7 @@
                   >
                 </fieldset>
               </li>
+              <button type="button" class="addBook">Add Book</button>
             </ul>
           </form>
         </div>
