@@ -36,6 +36,7 @@
                   type="text"
                   id="title"
                   name="book-title"
+                  required
                 />
               </li>
               <li class="form__item">
@@ -45,6 +46,7 @@
                   type="text"
                   name="book-author"
                   id="author"
+                  required
                 />
               </li>
               <li class="form__item">
@@ -56,6 +58,7 @@
                   id="pages"
                   min="1"
                   max="9999"
+                  required
                 />
               </li>
               <li class="form__item">
@@ -68,6 +71,7 @@
                       name="read-status"
                       id="yes"
                       value="yes"
+                      required
                     />Yes</label
                   >
                   <label class="fieldset__label" for="no"
@@ -81,13 +85,25 @@
                   >
                 </fieldset>
               </li>
-              <button id="addBook" type="button" class="add-book-btn">
-                Add Book
-              </button>
+              <li class="form__item">
+                <button id="addBook"  class="add-book-btn">
+                  Add Book
+                </button>
+              </li>
             </ul>
           </form>
         </div>
       </section>
+      <article>
+        <div id="cards-container" class="container">
+          <div class="card">  <!-- Example Card -->
+            <h2 class="card__title">Title</h2>
+            <p class="card__author">Author</p>
+            <p class="card__pages">Pages</p>
+            <p class="card__read-status">Read Status</p>
+          </div>
+        </div>
+      </article>
     </main>
   </body>
 </html>

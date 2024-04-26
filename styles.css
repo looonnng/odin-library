@@ -8,9 +8,14 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: system-ui, Helvetica, sans-serif;
+  font-size: 2rem;
+}
+
 .nav {
-  background-color: #606c38;
-  padding: 4em;
+  background-color: #193b50;
+  padding: 2em;
 }
 
 .container {
@@ -43,11 +48,6 @@
   padding: 1rem 0;
 }
 
-.form__label {
-  font-family: system-ui, "Helvetica Neue", sans-serif;
-  font-size: 2rem;
-}
-
 .form__input {
   width: 100%;
   font-size: 1.5rem;
@@ -67,4 +67,12 @@
   font-size: 2rem;
   padding: 1rem 2rem;
   border-radius: 1rem;
+}
+
+.card {
+  color: #fff;
+  background-color: #3b5c6f;
+  text-align: center;
+  border-radius: 1rem;
+  padding: 1em;
 }
