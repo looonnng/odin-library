@@ -69,10 +69,15 @@ body {
   border-radius: 1rem;
 }
 
+
 .card {
   color: #fff;
   background-color: #3b5c6f;
   text-align: center;
   border-radius: 1rem;
   padding: 1em;
+}
+
+.card + .card {
+  margin-top: 2rem;
 }
