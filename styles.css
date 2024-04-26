@@ -61,7 +61,9 @@
   margin: 1rem;
 }
 
-.addBook {
+.add-book-btn {
+  display: block;
+  margin: 0 auto;
   font-size: 2rem;
   padding: 1rem 2rem;
   border-radius: 1rem;
