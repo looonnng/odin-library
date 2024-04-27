@@ -43,9 +43,13 @@ body {
   color: #fff;
 }
 
+.main {
+  padding: 2em 0;
+}
+
 .form__item {
   list-style: none;
-  padding: 1rem 0;
+  padding: 1em 0;
 }
 
 .form__input {
@@ -69,6 +73,9 @@ body {
   border-radius: 1rem;
 }
 
+.article {
+  padding: 2em 0;
+}
 
 .card {
   color: #fff;
