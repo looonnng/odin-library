@@ -1,5 +1,5 @@
 // TODO : Add function to prevent/filter out duplicates
-// TODO : Prevent user from submitting read status only <-- user could submit form with only yes or no input
+
 
 const myLibrary = [];
 
@@ -14,15 +14,7 @@ function Book(title, author, pages, readStatus) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.readStatus = readStatus; //readStatus should only accepts user input of yes or no via checkbox
-
-  this.hasRead = function () {
-    return this.readStatus ? "has read" : "not read yet";
-  };
-
-  this.info = function () {
-    return `${title} by ${author}, ${pages} pages, ${this.hasRead()}`;
-  };
+  this.readStatus = readStatus;
 }
 
 // book should be an object instance of Book constructor
@@ -45,9 +37,9 @@ let toKillAMockingbird = new Book(
   "yes"
 );
 
-// myLibrary.push(theGreatGatsby);
-// myLibrary.push(donQuixote);
-// myLibrary.push(toKillAMockingbird);
+myLibrary.push(theGreatGatsby);
+myLibrary.push(donQuixote);
+myLibrary.push(toKillAMockingbird);
 
 function addCard(book) {
   const div = document.createElement("div");
@@ -65,20 +57,17 @@ function addCard(book) {
 }
 
 addBookBtn.addEventListener("click", (e) => {
-  const readStatus = document.querySelector(
-    'input[name="read-status"]:checked'
-  );
+  const readStatus = document.querySelector('input[name="read-status"]:checked');
+  if (titleField.value && authorField.value && pagesField.value && readStatus.value) {
+    let newBook = new Book(
+      titleField.value,
+      authorField.value,
+      pagesField.value,
+      readStatus.value
+    );
+    addBookToLibrary(newBook);
+    document.querySelector("form").reset(); // Reset all fields after button is clicked
+    e.preventDefault();
+  }
 
-  let newBook = new Book(
-    titleField.value,
-    authorField.value,
-    pagesField.value,
-    readStatus.value
-  );
-
-  addBookToLibrary(newBook);
-
-  document.querySelector("form").reset(); // Reset all fields after button is clicked
-
-  e.preventDefault();
 });
