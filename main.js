@@ -10,26 +10,6 @@ const authorField = document.querySelector("#author");
 const pagesField = document.querySelector("#pages");
 const cardsContainer = document.querySelector("#cards-container");
 
-addBookBtn.addEventListener("click", (e) => {
-  const readStatus = document.querySelector(
-    'input[name="read-status"]:checked'
-  );
-
-  let newBook = new Book(
-    titleField.value,
-    authorField.value,
-    pagesField.value,
-    readStatus.value
-  );
-
-  addBookToLibrary(newBook);
-
-  document.querySelector("form").reset(); // Reset all fields after button is clicked
-
-  addCard(newBook);
-  e.preventDefault();
-});
-
 function Book(title, author, pages, readStatus) {
   this.title = title;
   this.author = author;
@@ -48,7 +28,7 @@ function Book(title, author, pages, readStatus) {
 // book should be an object instance of Book constructor
 function addBookToLibrary(book) {
   myLibrary.push(book);
-  console.log("book added");
+  addCard(book);
 }
 
 let theGreatGatsby = new Book(
@@ -65,9 +45,9 @@ let toKillAMockingbird = new Book(
   "yes"
 );
 
-myLibrary.push(theGreatGatsby);
-myLibrary.push(donQuixote);
-myLibrary.push(toKillAMockingbird);
+// myLibrary.push(theGreatGatsby);
+// myLibrary.push(donQuixote);
+// myLibrary.push(toKillAMockingbird);
 
 function addCard(book) {
   const div = document.createElement("div");
@@ -84,6 +64,21 @@ function addCard(book) {
   document.querySelector("#cards-container").appendChild(div);
 }
 
-myLibrary.forEach((book) => {
-  addCard(book);
+addBookBtn.addEventListener("click", (e) => {
+  const readStatus = document.querySelector(
+    'input[name="read-status"]:checked'
+  );
+
+  let newBook = new Book(
+    titleField.value,
+    authorField.value,
+    pagesField.value,
+    readStatus.value
+  );
+
+  addBookToLibrary(newBook);
+
+  document.querySelector("form").reset(); // Reset all fields after button is clicked
+
+  e.preventDefault();
 });
