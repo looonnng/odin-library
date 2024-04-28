@@ -1,5 +1,6 @@
 // TODO : Add function to prevent/filter out duplicates
-
+// TODO : Add Remove button
+// TODO : Add Modify button??
 
 const myLibrary = [];
 
@@ -41,24 +42,48 @@ myLibrary.push(theGreatGatsby);
 myLibrary.push(donQuixote);
 myLibrary.push(toKillAMockingbird);
 
+// TODO: Simplify card.innerHTML
 function addCard(book) {
-  const div = document.createElement("div");
+  const card = document.createElement("div");
+  // const cardModify = document.createElement('div');
+  // const cardContent = document.createElement("div");
 
-  div.className = "card";
+  card.className = "card col";
+  // cardModify.className = 'card-modify';
+  // cardContent.className = "card-content";
 
-  div.innerHTML = `
+  card.innerHTML = `
+  <div class="card">
+  <div class="card-modify row">
+    <button type="button" class="edit"><span class="material-symbols-outlined">
+      edit
+      </span></button>
+    <button type="button" class="remove"><span class="material-symbols-outlined">
+      close
+      </span></button>
+  </div>
+  <div class="card-content">
     <h2 class="card__title">${book.title}</h2>
     <p class="card__author">${book.author}</p>
     <p class="card__pages">${book.pages}</p>
     <p class="card__read-status">${book.readStatus}</p>
+  </div>
+</div>
   `;
 
-  document.querySelector("#cards-container").appendChild(div);
+  document.querySelector("#cards-container").appendChild(card);
 }
 
 addBookBtn.addEventListener("click", (e) => {
-  const readStatus = document.querySelector('input[name="read-status"]:checked');
-  if (titleField.value && authorField.value && pagesField.value && readStatus.value) {
+  const readStatus = document.querySelector(
+    'input[name="read-status"]:checked'
+  );
+  if (
+    titleField.value &&
+    authorField.value &&
+    pagesField.value &&
+    readStatus.value
+  ) {
     let newBook = new Book(
       titleField.value,
       authorField.value,
@@ -69,5 +94,4 @@ addBookBtn.addEventListener("click", (e) => {
     document.querySelector("form").reset(); // Reset all fields after button is clicked
     e.preventDefault();
   }
-
 });
