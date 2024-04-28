@@ -27,6 +27,11 @@ body {
   display: flex;
 }
 
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
 .logo {
   color: #fff;
   font-size: 4rem;
@@ -77,14 +82,29 @@ body {
   padding: 2em 0;
 }
 
-.card {
+.card-content {
   color: #fff;
-  background-color: #3b5c6f;
   text-align: center;
   border-radius: 1rem;
   padding: 1em;
 }
 
-.card + .card {
+.card-content + .card-content {
   margin-top: 2rem;
+}
+
+.card {
+  background-color: #3b5c6f;
+  border-radius: 1rem;
+}
+
+.card-modify {
+  justify-content: space-between;
+}
+
+.edit,
+.remove {
+  margin: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
 }

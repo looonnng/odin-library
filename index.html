@@ -9,6 +9,10 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
     <script src="main.js" defer></script>
   </head>
   <body>
@@ -27,7 +31,7 @@
     <main>
       <section class="main">
         <div class="container">
-          <form method="get" class="main__form">
+          <form method="get" class="main__form" autocomplete="off">
             <ul class="form__link">
               <li class="form__item">
                 <label class="form__label" for="title">Title:</label>
@@ -86,17 +90,14 @@
                 </fieldset>
               </li>
               <li class="form__item">
-                <button id="addBook"  class="add-book-btn">
-                  Add Book
-                </button>
+                <button id="addBook" class="add-book-btn">Add Book</button>
               </li>
             </ul>
           </form>
         </div>
       </section>
       <article class="article">
-        <div id="cards-container" class="container">
-        </div>
+        <div id="cards-container" class="container"></div>
       </article>
     </main>
   </body>
