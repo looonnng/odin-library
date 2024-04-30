@@ -82,6 +82,10 @@ body {
   padding: 2em 0;
 }
 
+#cards-container {
+  gap: 4rem;
+}
+
 .card-content {
   color: #fff;
   text-align: center;
@@ -89,9 +93,6 @@ body {
   padding: 1em;
 }
 
-.card-content + .card-content {
-  margin-top: 2rem;
-}
 
 .card {
   background-color: #3b5c6f;
