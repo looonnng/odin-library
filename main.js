@@ -53,12 +53,11 @@ function addCard(book) {
   // cardContent.className = "card-content";
 
   card.innerHTML = `
-  <div class="card">
   <div class="card-modify row">
     <button type="button" class="edit"><span class="material-symbols-outlined">
       edit
       </span></button>
-    <button type="button" class="remove"><span class="material-symbols-outlined">
+    <button id="remove-btn" type="button" class="remove"><span class="material-symbols-outlined">
       close
       </span></button>
   </div>
@@ -68,11 +67,19 @@ function addCard(book) {
     <p class="card__pages">${book.pages}</p>
     <p class="card__read-status">${book.readStatus}</p>
   </div>
-</div>
   `;
-
   document.querySelector("#cards-container").appendChild(card);
 }
+
+// TODO Finish Remove Button
+function removeBook() {
+  const removeBtn = document.querySelector("#remove-btn");
+  removeBtn.addEventListener("click", (e) => {
+    console.log(e);
+  });
+}
+
+removeBook();
 
 addBookBtn.addEventListener("click", (e) => {
   const readStatus = document.querySelector(
