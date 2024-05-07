@@ -1,6 +1,7 @@
 // TODO : Add function to prevent/filter out duplicates
 // TODO : Add Remove button
 // TODO : Add Modify button??
+// TODO : Remove book from myLibrary after user click remove button2
 
 const myLibrary = [];
 
@@ -47,7 +48,8 @@ function addCard(book) {
   const card = document.createElement("div");
   // const cardModify = document.createElement('div');
   // const cardContent = document.createElement("div");
-
+  card.id = `myBook-${myLibrary.length}`;
+  card.setAttribute("data-book-id", myLibrary.length);
   card.className = "card col";
   // cardModify.className = 'card-modify';
   // cardContent.className = "card-content";
@@ -57,9 +59,7 @@ function addCard(book) {
     <button type="button" class="edit"><span class="material-symbols-outlined">
       edit
       </span></button>
-    <button id="remove-btn" type="button" class="remove"><span class="material-symbols-outlined">
-      close
-      </span></button>
+    <button type="button" class="remove-btn">X</button>
   </div>
   <div class="card-content">
     <h2 class="card__title">${book.title}</h2>
@@ -68,18 +68,18 @@ function addCard(book) {
     <p class="card__read-status">${book.readStatus}</p>
   </div>
   `;
-  document.querySelector("#cards-container").appendChild(card);
+  cardsContainer.appendChild(card);
 }
 
 // TODO Finish Remove Button
 function removeBook() {
-  const removeBtn = document.querySelector("#remove-btn");
-  removeBtn.addEventListener("click", (e) => {
-    console.log(e);
+  const removeBtn = document.querySelectorAll(".remove-btn");
+  removeBtn.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.target.parentNode.parentNode.remove();
+    });
   });
 }
-
-removeBook();
 
 addBookBtn.addEventListener("click", (e) => {
   const readStatus = document.querySelector(
@@ -99,6 +99,7 @@ addBookBtn.addEventListener("click", (e) => {
     );
     addBookToLibrary(newBook);
     document.querySelector("form").reset(); // Reset all fields after button is clicked
+    removeBook();
     e.preventDefault();
   }
 });
