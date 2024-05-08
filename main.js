@@ -61,7 +61,7 @@ function addCard(book) {
       </span></button>
     <button type="button" class="remove-btn"><span class="material-symbols-outlined">
       close
-      </span></button>
+      </span></button>1
   </div>
   <div class="card-content">
     <h2 class="card__title">${book.title}</h2>
