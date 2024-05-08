@@ -56,10 +56,12 @@ function addCard(book) {
 
   card.innerHTML = `
   <div class="card-modify row">
-    <button type="button" class="edit"><span class="material-symbols-outlined">
+    <button type="button" class="edit-btn"><span class="material-symbols-outlined">
       edit
       </span></button>
-    <button type="button" class="remove-btn">X</button>
+    <button type="button" class="remove-btn"><span class="material-symbols-outlined">
+      close
+      </span></button>
   </div>
   <div class="card-content">
     <h2 class="card__title">${book.title}</h2>
@@ -76,7 +78,7 @@ function removeBook() {
   const removeBtn = document.querySelectorAll(".remove-btn");
   removeBtn.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      e.target.parentNode.parentNode.remove();
+      e.target.closest(".card").remove(); //This target the .card
     });
   });
 }
