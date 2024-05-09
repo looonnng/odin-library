@@ -3,7 +3,7 @@
 // TODO : Add Modify button??
 // TODO : Remove book from myLibrary after user click remove button2
 
-const myLibrary = [];
+let myLibrary = [];
 
 // DOM
 const addBookBtn = document.querySelector("#addBook");
@@ -22,34 +22,17 @@ function Book(title, author, pages, readStatus) {
 // book should be an object instance of Book constructor
 function addBookToLibrary(book) {
   myLibrary.push(book);
+  book.id = `${myLibrary.length - 1}`;
   addCard(book);
 }
-
-let theGreatGatsby = new Book(
-  "The Great Gatsby",
-  "F. Scott Fitzgerald",
-  137,
-  "no"
-);
-let donQuixote = new Book("Don Quixote", "Miguel de Cervantes", 1072, "no");
-let toKillAMockingbird = new Book(
-  "To Kill a Mockingbird",
-  "Harper Lee",
-  281,
-  "yes"
-);
-
-myLibrary.push(theGreatGatsby);
-myLibrary.push(donQuixote);
-myLibrary.push(toKillAMockingbird);
 
 // TODO: Simplify card.innerHTML
 function addCard(book) {
   const card = document.createElement("div");
   // const cardModify = document.createElement('div');
   // const cardContent = document.createElement("div");
-  card.id = `myBook-${myLibrary.length}`;
-  card.setAttribute("data-book-id", myLibrary.length);
+  card.id = `myBook-${myLibrary.length - 1}`;
+  card.setAttribute("data-book-id", myLibrary.length - 1);
   card.className = "card col";
   // cardModify.className = 'card-modify';
   // cardContent.className = "card-content";
@@ -61,7 +44,7 @@ function addCard(book) {
       </span></button>
     <button type="button" class="remove-btn"><span class="material-symbols-outlined">
       close
-      </span></button>1
+      </span></button>
   </div>
   <div class="card-content">
     <h2 class="card__title">${book.title}</h2>
@@ -78,7 +61,13 @@ function removeBook() {
   const removeBtn = document.querySelectorAll(".remove-btn");
   removeBtn.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      e.target.closest(".card").remove(); //This target the .card
+      const card = e.target.closest(".card");
+      const bookID = card.getAttribute("data-book-id"); // convert string to num
+      const bookIndex = myLibrary.findIndex((book) => book.id === bookID);
+      console.log(bookIndex);
+      myLibrary.splice(bookIndex, 1);
+      console.log(myLibrary);
+      card.remove();
     });
   });
 }
