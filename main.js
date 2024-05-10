@@ -29,23 +29,19 @@ function addBookToLibrary(book) {
 // TODO: Simplify card.innerHTML
 function addCard(book) {
   const card = document.createElement("div");
-  // const cardModify = document.createElement('div');
-  // const cardContent = document.createElement("div");
-  card.id = `myBook-${myLibrary.length - 1}`;
-  card.setAttribute("data-book-id", myLibrary.length - 1);
-  card.className = "card col";
-  // cardModify.className = 'card-modify';
-  // cardContent.className = "card-content";
+  const cardModify = document.createElement("div");
+  const cardContent = document.createElement("div");
+  const editButton = document.createElement("button");
+  const removeButton = document.createElement("button");
 
-  card.innerHTML = `
-  <div class="card-modify row">
-    <button type="button" class="edit-btn"><span class="material-symbols-outlined">
-      edit
-      </span></button>
-    <button type="button" class="remove-btn"><span class="material-symbols-outlined">
-      close
-      </span></button>
-  </div>
+  card.id = `myBook-${myLibrary.length - 1}`;
+  card.className = "card col";
+  card.setAttribute("data-book-id", myLibrary.length - 1);
+
+  cardModify.className = "card-modify row";
+
+  cardContent.className = "card-content";
+  cardContent.innerHTML = `
   <div class="card-content">
     <h2 class="card__title">${book.title}</h2>
     <p class="card__author">${book.author}</p>
@@ -53,6 +49,20 @@ function addCard(book) {
     <p class="card__read-status">${book.readStatus}</p>
   </div>
   `;
+
+  editButton.className = "edit-btn";
+  editButton.innerHTML = '<span class="material-symbols-outlined">edit</span>';
+
+  removeButton.className = "remove-btn";
+  removeButton.innerHTML =
+    '<span class="material-symbols-outlined">close</span>';
+
+  cardModify.appendChild(editButton);
+  cardModify.appendChild(removeButton);
+
+  card.appendChild(cardModify);
+  card.appendChild(cardContent);
+
   cardsContainer.appendChild(card);
 }
 
@@ -62,10 +72,9 @@ function removeBook() {
   removeBtn.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const card = e.target.closest(".card");
-      const bookID = card.getAttribute("data-book-id"); // convert string to num
-      const bookIndex = myLibrary.findIndex((book) => book.id === bookID);
-      console.log(bookIndex);
-      myLibrary.splice(bookIndex, 1);
+      const bookID = card.getAttribute("data-book-id");
+      console.log(bookID);
+      myLibrary.splice(bookID, 1); //Need to update the array after removing book
       console.log(myLibrary);
       card.remove();
     });
@@ -94,3 +103,5 @@ addBookBtn.addEventListener("click", (e) => {
     e.preventDefault();
   }
 });
+
+function displayBook() {}
