@@ -6,7 +6,7 @@
 const myLibrary = [];
 
 // DOM
-let cardsContainer = document.querySelector("#cards-container");
+let cardsContainerEl = document.querySelector("#cards-container");
 const addBookBtn = document.querySelector("#addBook");
 
 function Book(title, author, pages, readStatus) {
@@ -32,39 +32,30 @@ function createCard(book) {
   const card = document.createElement("div");
   const cardModify = document.createElement("div");
   const cardContent = document.createElement("div");
-  const editButton = document.createElement("button");
-  const removeButton = document.createElement("button");
+  const editBtn = document.createElement("button");
+  const removeBtn = document.createElement("button");
 
-  card.id = `myBook-${myLibrary.length - 1}`;
-  card.className = "card col";
   card.setAttribute("data-book-id", myLibrary.length - 1);
-
+  card.className = "card col";
   cardModify.className = "card-modify row";
-
   cardContent.className = "card-content";
+  editBtn.className = "edit-btn";
+  removeBtn.className = "remove-btn";
+
   cardContent.innerHTML = `
-  <div class="card-content">
     <h2 class="card__title">${book.title}</h2>
     <p class="card__author">${book.author}</p>
     <p class="card__pages">${book.pages}</p>
     <p class="card__read-status">${book.readStatus}</p>
-  </div>
   `;
+  editBtn.innerHTML = '<span class="material-symbols-outlined">edit</span>';
+  removeBtn.innerHTML = '<span class="material-symbols-outlined">close</span>';
 
-  editButton.className = "edit-btn";
-  editButton.innerHTML = '<span class="material-symbols-outlined">edit</span>';
-
-  removeButton.className = "remove-btn";
-  removeButton.innerHTML =
-    '<span class="material-symbols-outlined">close</span>';
-
-  cardModify.appendChild(editButton);
-  cardModify.appendChild(removeButton);
-
+  cardModify.appendChild(editBtn);
+  cardModify.appendChild(removeBtn);
   card.appendChild(cardModify);
   card.appendChild(cardContent);
-
-  cardsContainer.appendChild(card);
+  cardsContainerEl.appendChild(card);
 }
 
 // TODO Finish Remove Button
@@ -82,15 +73,14 @@ function removeBook() {
   });
 }
 
+// Event: Add book when user click add book button
 document.querySelector("#new-book-form").addEventListener("submit", (e) => {
   e.preventDefault();
   addBookToLibrary();
 });
 
+// Event: Display book
 function displayBook() {
-  cardsContainer.innerHTML = '';
+  cardsContainerEl.innerHTML = ""; // Clear cardContainer DOM element to prevent duplicate
   myLibrary.forEach((book) => createCard(book));
 }
-
-// // Event: Display Books
-// document.addEventListener("DOMContentLoaded", () => displayBook(myLibrary));
