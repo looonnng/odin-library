@@ -3,14 +3,11 @@
 // TODO : Add Modify button??
 // TODO : Remove book from myLibrary after user click remove button2
 
-let myLibrary = [];
+const myLibrary = [];
 
 // DOM
+let cardsContainer = document.querySelector("#cards-container");
 const addBookBtn = document.querySelector("#addBook");
-const titleField = document.querySelector("#title");
-const authorField = document.querySelector("#author");
-const pagesField = document.querySelector("#pages");
-const cardsContainer = document.querySelector("#cards-container");
 
 function Book(title, author, pages, readStatus) {
   this.title = title;
@@ -20,14 +17,18 @@ function Book(title, author, pages, readStatus) {
 }
 
 // book should be an object instance of Book constructor
-function addBookToLibrary(book) {
-  myLibrary.push(book);
-  book.id = `${myLibrary.length - 1}`;
-  addCard(book);
+function addBookToLibrary() {
+  let titleField = document.querySelector("#title").value;
+  let authorField = document.querySelector("#author").value;
+  let pagesField = document.querySelector("#pages").value;
+  let readStatus = document.querySelector('input[name="read-status"]:checked').value;
+  let newBook = new Book(titleField, authorField, pagesField, readStatus);
+  myLibrary.push(newBook);
+  displayBook();
 }
 
 // TODO: Simplify card.innerHTML
-function addCard(book) {
+function createCard(book) {
   const card = document.createElement("div");
   const cardModify = document.createElement("div");
   const cardContent = document.createElement("div");
@@ -81,27 +82,15 @@ function removeBook() {
   });
 }
 
-addBookBtn.addEventListener("click", (e) => {
-  const readStatus = document.querySelector(
-    'input[name="read-status"]:checked'
-  );
-  if (
-    titleField.value &&
-    authorField.value &&
-    pagesField.value &&
-    readStatus.value
-  ) {
-    let newBook = new Book(
-      titleField.value,
-      authorField.value,
-      pagesField.value,
-      readStatus.value
-    );
-    addBookToLibrary(newBook);
-    document.querySelector("form").reset(); // Reset all fields after button is clicked
-    removeBook();
-    e.preventDefault();
-  }
+document.querySelector("#new-book-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  addBookToLibrary();
 });
 
-function displayBook() {}
+function displayBook() {
+  cardsContainer.innerHTML = '';
+  myLibrary.forEach((book) => createCard(book));
+}
+
+// // Event: Display Books
+// document.addEventListener("DOMContentLoaded", () => displayBook(myLibrary));
