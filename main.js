@@ -1,12 +1,9 @@
 // TODO : Add function to prevent/filter out duplicates
-// TODO : Add Remove button
 // TODO : Add Modify button??
-// TODO : Remove book from myLibrary after user click remove button
+// TODO : Change read status to not started, in progress, finished
 
 const myLibrary = [];
 
-// DOM
-const addBookBtn = document.querySelector("#addBook");
 
 function Book(title, author, pages, readStatus) {
   this.title = title;
@@ -16,7 +13,7 @@ function Book(title, author, pages, readStatus) {
   this.id = myLibrary.length;
 }
 
-// book should be an object instance of Book constructor
+// Book should be an object instance of Book constructor
 function addBookToLibrary() {
   let titleField = document.querySelector("#title").value;
   let authorField = document.querySelector("#author").value;
@@ -35,6 +32,7 @@ let cardsContainerEl = document.querySelector("#cards-container");
 document.querySelector("#new-book-form").addEventListener("submit", (event) => {
   event.preventDefault();
   addBookToLibrary();
+  event.target.reset();
 });
 
 function createCard(book) {
@@ -84,9 +82,9 @@ function removeBook() {
     btn.addEventListener("click", (event) => {
       const card = event.target.closest(".card");
       let bookID = card.getAttribute("data-book-id");
-      myLibrary.splice(bookID, 1); // Need to update the array after removing book
+      myLibrary.splice(bookID, 1); 
       card.remove();
-      createNewID();
+      createNewID(); // Update the array after removing book
     });
   });
 }
