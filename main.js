@@ -1,6 +1,6 @@
 // TODO : Add function to prevent/filter out duplicates
 // TODO : Add Modify button??
-// TODO : Change read status to not started, in progress, finished
+
 
 const myLibrary = [];
 
@@ -49,7 +49,7 @@ function createCard(book) {
   removeBtn.className = "remove-btn";
 
   cardContent.innerHTML = `
-    <h2 class="card__title">${book.title}</h2>
+    <h1 class="card__title">${book.title}</h1>
     <p class="card__author">${book.author}</p>
     <p class="card__pages">${book.pages}</p>
     <p class="card__read-status">${book.readStatus}</p>
