@@ -31,7 +31,12 @@
     <main>
       <section class="main">
         <div class="container">
-          <form id="new-book-form" method="get" class="main__form" autocomplete="off">
+          <form
+            id="new-book-form"
+            method="get"
+            class="main__form"
+            autocomplete="off"
+          >
             <ul class="form__link">
               <li class="form__item">
                 <label class="form__label" for="title">Title:</label>
@@ -68,25 +73,36 @@
               <li class="form__item">
                 <fieldset>
                   <legend class="form__label">Have you read the book?</legend>
-                  <label class="fieldset__label" for="yes"
-                    ><input
-                      class="reading"
-                      type="radio"
-                      name="read-status"
-                      id="yes"
-                      value="yes"
-                      required
-                    />Yes</label
-                  >
-                  <label class="fieldset__label" for="no"
-                    ><input
-                      class="reading"
-                      type="radio"
-                      name="read-status"
-                      id="no"
-                      value="no"
-                    />No</label
-                  >
+                  <div class="fieldset-label-wrapper">
+                    <label class="fieldset__label" for="not-started"
+                      ><input
+                        class="fieldset__input"
+                        type="radio"
+                        name="read-status"
+                        id="not-started"
+                        value="not-started"
+                        required
+                      />Not Started</label
+                    >
+                    <label class="fieldset__label" for="in-progress"
+                      ><input
+                        class="fieldset__input"
+                        type="radio"
+                        name="read-status"
+                        id="in-progress"
+                        value="in-progress"
+                      />In Progress</label
+                    >
+                    <label class="fieldset__label" for="finished"
+                      ><input
+                        class="fieldset__input"
+                        type="radio"
+                        name="read-status"
+                        id="finished"
+                        value="finished"
+                      />Finished</label
+                    >
+                  </div>
                 </fieldset>
               </li>
               <li class="form__item">
