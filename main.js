@@ -1,5 +1,6 @@
 // TODO : Add function to prevent/filter out duplicates
 // TODO : Add Modify button??
+// Cannot edit simultaneously -- Opt for modals or popup edit instead?
 
 const myLibrary = [];
 
@@ -21,6 +22,7 @@ function addBookToLibrary() {
   myLibrary.push(newBook);
   displayBook();
   removeBook();
+  editBook();
 }
 
 // Event: Add book when user click add book button
@@ -72,8 +74,8 @@ function createNewID() {
 }
 
 function removeBook() {
-  const removeBtn = document.querySelectorAll('.remove-btn');
-  removeBtn.forEach(btn => {
+  const removeBtns = document.querySelectorAll('.remove-btn');
+  removeBtns.forEach(btn => {
     btn.addEventListener('click', event => {
       const card = event.target.closest('.card');
       let bookID = card.getAttribute('data-book-id');
@@ -84,4 +86,48 @@ function removeBook() {
   });
 }
 
-function editBook() {}
+function editBook() {
+  const editBtns = document.querySelectorAll('.edit-btn');
+  editBtns.forEach(btn => {
+    btn.addEventListener('click', event => {
+      const cardContent = event.target.closest('.card').lastChild;
+      console.log(cardContent);
+      const options = document.createElement('div');
+      options.innerHTML = `
+      <div class="fieldset-controls-wrapper">
+        <label class="fieldset__label" for="not-started-edit"
+          ><input
+            class="fieldset__input"
+            type="radio"
+            name="read-status-edit"
+            id="not-started-edit"
+            value="Not Started"
+            required
+          />Not Started</label
+        >
+        <label class="fieldset__label" for="in-progress-edit"
+          ><input
+            class="fieldset__input"
+            type="radio"
+            name="read-status-edit"
+            id="in-progress-edit"
+            value="In Progress"
+          />In Progress</label
+        >
+        <label class="fieldset__label" for="finished-edit"
+          ><input
+            class="fieldset__input"
+            type="radio"
+            name="read-status-edit"
+            id="finished-edit"
+            value="Finished"
+          />Finished</label
+        >
+      </div>
+      `;
+
+      cardContent.removeChild(cardContent.lastElementChild);
+      cardContent.appendChild(options);
+    });
+  });
+}
