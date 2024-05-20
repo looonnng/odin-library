@@ -93,7 +93,7 @@ function editBook() {
       const cardContent = event.target.closest('.card').lastChild;
       console.log(cardContent);
       const options = document.createElement('div');
-      options.className = 'controls-wrapper';
+      options.className = 'edit-controls-wrapper';
       options.innerHTML = `
       <label class="fieldset__label" for="not-started-edit"
         ><input
