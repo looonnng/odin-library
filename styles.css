@@ -115,7 +115,8 @@ body {
   border-radius: 1rem;
 }
 
-.card-modify {
+.card-modify,
+.card-confirm-changes {
   justify-content: space-between;
 }
 
@@ -130,13 +131,15 @@ body {
 }
 
 .edit-btn,
-.remove-btn {
+.remove-btn,
+.save-btn,
+.cancel-btn {
   margin: 1rem;
   padding: 0.5rem;
   border-radius: 0.5rem;
 }
 
-.controls-wrapper {
+.edit-controls-wrapper {
   text-align: left;
 }
 
