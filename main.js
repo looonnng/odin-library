@@ -91,7 +91,6 @@ function editBook() {
   editBtns.forEach(btn => {
     btn.addEventListener('click', event => {
       const cardContent = event.target.closest('.card').lastChild;
-      console.log(cardContent);
       const options = document.createElement('div');
       options.className = 'edit-controls-wrapper';
       options.innerHTML = `
@@ -125,8 +124,31 @@ function editBook() {
       >
       `;
 
+      const cardConfirmChanges = document.createElement('div');
+      const saveBtn = document.createElement('button');
+      const cancelBtn = document.createElement('button');
+
+      cardConfirmChanges.className = 'card-confirm-changes row';
+      saveBtn.className = 'save-btn';
+      cancelBtn.className = 'cancel-btn';
+
+      saveBtn.innerHTML = '<span class="material-symbols-outlined">save</span>';
+      cancelBtn.innerHTML =
+        '<span class="material-symbols-outlined">cancel</span>';
+
+      cardConfirmChanges.appendChild(saveBtn);
+      cardConfirmChanges.appendChild(cancelBtn);
+      event.target.closest('.card').appendChild(cardConfirmChanges);
       cardContent.removeChild(cardContent.lastElementChild);
       cardContent.appendChild(options);
     });
   });
 }
+
+/* Create save and cancel changes button
+
+create new div
+give class name
+add buttons
+
+*/
