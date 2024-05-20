@@ -139,3 +139,33 @@ body {
 .controls-wrapper {
   text-align: left;
 }
+
+/* Media Queries */
+@media screen and (min-width: 480px) {
+  .material-symbols-outlined.logo-responsive {
+    font-size: 5rem;
+  }
+  .logo__title {
+    font-size: 4rem;
+    margin-left: 1rem;
+  }
+
+  .fieldset-controls-wrapper,
+  .edit-controls-wrapper {
+    display: flex;
+  }
+  .fieldset__label {
+    flex: 1;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+}
+
+/* 
+  320px — 480px: Mobile devices
+  481px — 768px: iPads, Tablets
+  769px — 1024px: Small screens, laptops
+  1025px — 1200px: Desktops, large screens
+  1201px and more —  Extra large screens, TV
+*/
