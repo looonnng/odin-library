@@ -1,7 +1,5 @@
 // TODO : Add function to prevent/filter out duplicates
-// TODO : Add Modify button??
-// Cannot edit simultaneously -- Opt for modals or popup edit instead?
-
+// TODO: Fix bug to prevent user from creating multiple options by clicking edit button multiple times
 const myLibrary = [];
 
 function Book(title, author, pages, readStatus) {
@@ -90,6 +88,7 @@ function editBook() {
   const editBtns = document.querySelectorAll('.edit-btn');
   editBtns.forEach(btn => {
     btn.addEventListener('click', event => {
+      console.log();
       const cardContent = event.target.closest('.card').lastChild;
       const options = document.createElement('div');
       options.className = 'edit-controls-wrapper';
@@ -141,14 +140,7 @@ function editBook() {
       event.target.closest('.card').appendChild(cardConfirmChanges);
       cardContent.removeChild(cardContent.lastElementChild);
       cardContent.appendChild(options);
+      event.target.closest('.edit-btn').remove();
     });
   });
 }
-
-/* Create save and cancel changes button
-
-create new div
-give class name
-add buttons
-
-*/
