@@ -153,9 +153,13 @@ body {
   .fieldset-controls-wrapper,
   .edit-controls-wrapper {
     display: flex;
+    text-align: center;
   }
   .fieldset__label {
     flex: 1;
+  }
+  .form__fieldset {
+    padding: 2rem;
   }
 }
 
