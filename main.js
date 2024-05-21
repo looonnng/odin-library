@@ -1,5 +1,8 @@
 // TODO : Add function to prevent/filter out duplicates
 // TODO: Fix bug to prevent user from creating multiple options by clicking edit button multiple times
+// If user click on edit button and try to add a new book - the form will reset
+// Multiple cards edit -- each book need unique options
+
 const myLibrary = [];
 
 function Book(title, author, pages, readStatus) {
@@ -88,10 +91,17 @@ function editBook() {
   const editBtns = document.querySelectorAll('.edit-btn');
   editBtns.forEach(btn => {
     btn.addEventListener('click', event => {
-      console.log();
       const cardContent = event.target.closest('.card').lastChild;
       const options = document.createElement('div');
-      options.className = 'edit-controls-wrapper';
+      const cardConfirmChanges = document.createElement('div');
+      const saveBtn = document.createElement('button');
+      const cancelBtn = document.createElement('button');
+
+      options.className = 'edit-controls radios';
+      cardConfirmChanges.className = 'card-confirm-changes row';
+      saveBtn.className = 'save-btn';
+      cancelBtn.className = 'cancel-btn';
+
       options.innerHTML = `
       <label class="fieldset__label" for="not-started-edit"
         ><input
@@ -122,18 +132,8 @@ function editBook() {
         />Finished</label
       >
       `;
-
-      const cardConfirmChanges = document.createElement('div');
-      const saveBtn = document.createElement('button');
-      const cancelBtn = document.createElement('button');
-
-      cardConfirmChanges.className = 'card-confirm-changes row';
-      saveBtn.className = 'save-btn';
-      cancelBtn.className = 'cancel-btn';
-
-      saveBtn.innerHTML = '<span class="material-symbols-outlined">save</span>';
-      cancelBtn.innerHTML =
-        '<span class="material-symbols-outlined">cancel</span>';
+      saveBtn.innerHTML = 'Save';
+      cancelBtn.innerHTML = 'Cancel';
 
       cardConfirmChanges.appendChild(saveBtn);
       cardConfirmChanges.appendChild(cancelBtn);
@@ -141,6 +141,30 @@ function editBook() {
       cardContent.removeChild(cardContent.lastElementChild);
       cardContent.appendChild(options);
       event.target.closest('.edit-btn').remove();
+      saveEditOptions();
+      
+    });
+  });
+}
+
+function saveEditOptions() {
+  const saveBtns = document.querySelectorAll('.save-btn');
+  const cancelBtns = document.querySelectorAll('.cancel-btn');
+  saveBtns.forEach(saveBtn => {
+    saveBtn.addEventListener('click', e => {
+      console.log(e);
+    });
+  });
+  cancelBtns.forEach(cancelBtn => {
+    cancelBtn.addEventListener('click', e => {
+      const editBtn = document.createElement('button');
+      editBtn.className = 'edit-btn'; 
+      editBtn.innerHTML = '<span class="material-symbols-outlined">edit</span>';
+      let cardModify = e.target.closest('.card').firstElementChild;
+      cardModify.insertBefore(editBtn, cardModify.children[0]);
+      e.target.parentElement.remove();
+      // e.target.closest('.edit-controls').remove();
+      editBook();
     });
   });
 }
