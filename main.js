@@ -138,11 +138,10 @@ function editBook() {
       cardConfirmChanges.appendChild(saveBtn);
       cardConfirmChanges.appendChild(cancelBtn);
       event.target.closest('.card').appendChild(cardConfirmChanges);
-      cardContent.removeChild(cardContent.lastElementChild);
+      cardContent.children[3].hidden = true; // Hide read status element
       cardContent.appendChild(options);
-      event.target.closest('.edit-btn').remove();
+      event.target.closest('.edit-btn').hidden = true; // Hide edit button
       saveEditOptions();
-      
     });
   });
 }
@@ -157,14 +156,14 @@ function saveEditOptions() {
   });
   cancelBtns.forEach(cancelBtn => {
     cancelBtn.addEventListener('click', e => {
-      const editBtn = document.createElement('button');
-      editBtn.className = 'edit-btn'; 
-      editBtn.innerHTML = '<span class="material-symbols-outlined">edit</span>';
-      let cardModify = e.target.closest('.card').firstElementChild;
-      cardModify.insertBefore(editBtn, cardModify.children[0]);
-      e.target.parentElement.remove();
-      // e.target.closest('.edit-controls').remove();
-      editBook();
+      const card = e.target.closest('.card');
+      const cardModify = card.firstElementChild;
+      const cardContent = card.children[1];
+      console.log(cardContent);
+      cardModify.firstElementChild.hidden = false;
+      cardContent.children[3].hidden = false;
+      cardContent.children[4].remove(); // Remove because options will be created in editBook()
+      e.target.parentElement.remove(); // Remove Save and Cancel buttons
     });
   });
 }
