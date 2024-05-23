@@ -1,6 +1,6 @@
 // TODO : Add function to prevent/filter out duplicates
 // TODO: Fix bug to prevent user from creating multiple options by clicking edit button multiple times
-// If user click on edit button and try to add a new book - the form will reset
+// TODO: Fix if user click on edit button and try to add a new book - the form will reset
 // Multiple cards edit -- each book need unique options
 
 const myLibrary = [];
@@ -18,7 +18,9 @@ function addBookToLibrary() {
   let titleField = document.querySelector('#title').value;
   let authorField = document.querySelector('#author').value;
   let pagesField = document.querySelector('#pages').value;
-  let readStatus = document.querySelector('input[name="read-status"]:checked');
+  let readStatus = document.querySelector(
+    'input[name="read-status"]:checked'
+  ).value;
   let newBook = new Book(titleField, authorField, pagesField, readStatus);
   myLibrary.push(newBook);
   displayBook();
@@ -50,7 +52,9 @@ function createCard(book) {
     <h1 class="card__title">${book.title}</h1>
     <p class="card__author">${book.author}</p>
     <p class="card__pages">${book.pages}</p>
-    <p class="card__read-status--${book.readStatus.id}">${book.readStatus.value}</p>
+    <p class="card__read-status--${book.readStatus
+      .toLowerCase()
+      .replace(' ', '-')}">${book.readStatus}</p>
   `;
   editBtn.innerHTML = '<span class="material-symbols-outlined">edit</span>';
   removeBtn.innerHTML = '<span class="material-symbols-outlined">close</span>';
@@ -151,7 +155,17 @@ function saveEditOptions() {
   const cancelBtns = document.querySelectorAll('.cancel-btn');
   saveBtns.forEach(saveBtn => {
     saveBtn.addEventListener('click', e => {
-      console.log(e);
+      try {
+        let readStatus = document.querySelector(
+          'input[name="read-status-edit"]:checked'
+        ).value;
+        const card = e.target.closest('.card');
+        let bookID = card.getAttribute('data-book-id');
+        console.log(bookID, readStatus);
+        console.log(myLibrary[bookID]);
+      } catch (err) {
+        alert((err = 'Please Select an Option'));
+      }
     });
   });
   cancelBtns.forEach(cancelBtn => {
@@ -159,7 +173,6 @@ function saveEditOptions() {
       const card = e.target.closest('.card');
       const cardModify = card.firstElementChild;
       const cardContent = card.children[1];
-      console.log(cardContent);
       cardModify.firstElementChild.hidden = false;
       cardContent.children[3].hidden = false;
       cardContent.children[4].remove(); // Remove because options will be created in editBook()
