@@ -156,15 +156,26 @@ function saveEditOptions() {
   saveBtns.forEach(saveBtn => {
     saveBtn.addEventListener('click', e => {
       try {
-        let readStatus = document.querySelector(
+        let readStatusEdit = document.querySelector(
           'input[name="read-status-edit"]:checked'
         ).value;
         const card = e.target.closest('.card');
+        const cardModify = card.firstElementChild;
+        const cardContent = card.children[1];
+        cardModify.firstElementChild.hidden = false;
         let bookID = card.getAttribute('data-book-id');
-        console.log(bookID, readStatus);
-        console.log(myLibrary[bookID]);
+        myLibrary[bookID]['readStatus'] = readStatusEdit;
+        cardContent.children[3].innerHTML = `
+        <p class="card__read-status--${readStatusEdit
+          .toLowerCase()
+          .replace(' ', '-')}">${readStatusEdit}</p>
+        `;
+        cardContent.children[3].hidden = false;
+        cardContent.children[4].remove();
+        e.target.parentElement.remove();
       } catch (err) {
-        alert((err = 'Please Select an Option'));
+        console.log(err);
+        // alert((err = 'Please Select an Option'));
       }
     });
   });
