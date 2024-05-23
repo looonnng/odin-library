@@ -115,11 +115,6 @@ body {
   border-radius: 1rem;
 }
 
-.card-modify,
-.card-confirm-changes {
-  justify-content: space-between;
-}
-
 .card__read-status--not-started {
   color: var(--read-status-not-started);
 }
@@ -137,6 +132,11 @@ body {
   margin: 1rem;
   padding: 0.5rem;
   border-radius: 0.5rem;
+}
+
+.remove-btn,
+.cancel-btn {
+  margin-left: auto;
 }
 
 button:active {
