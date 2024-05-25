@@ -191,3 +191,11 @@ function saveEditOptions() {
     });
   });
 }
+
+/* 
+
+If user click to edit a card and 
+click a new edit on a diffrent card
+the original card will be null
+
+*/
