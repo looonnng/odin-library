@@ -10,7 +10,6 @@ function Book(title, author, pages, readStatus) {
   this.author = author;
   this.pages = pages;
   this.readStatus = readStatus;
-  this.id = myLibrary.length;
 }
 
 // Book should be an object instance of Book constructor
@@ -21,11 +20,23 @@ function addBookToLibrary() {
   let readStatus = document.querySelector(
     'input[name="read-status"]:checked'
   ).value;
-  let newBook = new Book(titleField, authorField, pagesField, readStatus);
-  myLibrary.push(newBook);
-  displayBook();
-  removeBook();
-  editBook();
+
+  if (
+    myLibrary.some(
+      book =>
+        book.title === titleField &&
+        book.author === authorField &&
+        book.pages === pagesField
+    )
+  ) {
+    alert('This Book has already been added!');
+  } else {
+    let newBook = new Book(titleField, authorField, pagesField, readStatus);
+    myLibrary.push(newBook);
+    displayBook();
+    removeBook();
+    editBook();
+  }
 }
 
 // Event: Add book when user click add book button
@@ -42,7 +53,7 @@ function createCard(book) {
   const cardContent = document.createElement('div');
   const editBtn = document.createElement('button');
   const removeBtn = document.createElement('button');
-  card.setAttribute('data-book-id', book.id);
+  card.setAttribute('data-book-id', myLibrary.length - 1);
   card.className = 'card col';
   cardModify.className = 'card-modify row';
   cardContent.className = 'card-content';
