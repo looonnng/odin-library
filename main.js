@@ -53,7 +53,7 @@ function createCard(book) {
   const cardContent = document.createElement('div');
   const editBtn = document.createElement('button');
   const removeBtn = document.createElement('button');
-  card.setAttribute('data-book-id', myLibrary.length - 1);
+  card.setAttribute('data-book-id', myLibrary.indexOf(book));
   card.className = 'card col';
   cardModify.className = 'card-modify row';
   cardContent.className = 'card-content';
@@ -85,7 +85,6 @@ function displayBook() {
 
 function createNewID() {
   const cards = document.querySelectorAll('.card');
-  myLibrary.forEach((book, index) => (book.id = index));
   cards.forEach((card, index) => card.setAttribute('data-book-id', index));
 }
 
@@ -94,7 +93,7 @@ function removeBook() {
   removeBtns.forEach(btn => {
     btn.addEventListener('click', event => {
       const card = event.target.closest('.card');
-      let bookID = card.getAttribute('data-book-id');
+      const bookID = card.getAttribute('data-book-id');
       myLibrary.splice(bookID, 1);
       card.remove();
       createNewID(); // Update the array after removing book
@@ -106,7 +105,9 @@ function editBook() {
   const editBtns = document.querySelectorAll('.edit-btn');
   editBtns.forEach(btn => {
     btn.addEventListener('click', event => {
-      const cardContent = event.target.closest('.card').lastChild;
+      const card = event.target.closest('.card');
+      const bookID = card.getAttribute('data-book-id');
+      const cardContent = card.lastChild;
       const options = document.createElement('div');
       const cardConfirmChanges = document.createElement('div');
       const saveBtn = document.createElement('button');
@@ -118,31 +119,31 @@ function editBook() {
       cancelBtn.className = 'cancel-btn';
 
       options.innerHTML = `
-      <label class="fieldset__label" for="not-started-edit"
+      <label class="fieldset__label" for="not-started-edit-${bookID}"
         ><input
           class="fieldset__input"
           type="radio"
-          name="read-status-edit"
-          id="not-started-edit"
+          name="read-status-edit-${bookID}"
+          id="not-started-edit-${bookID}"
           value="Not Started"
           required
         />Not Started</label
       >
-      <label class="fieldset__label" for="in-progress-edit"
+      <label class="fieldset__label" for="in-progress-edit-${bookID}"
         ><input
           class="fieldset__input"
           type="radio"
-          name="read-status-edit"
-          id="in-progress-edit"
+          name="read-status-edit-${bookID}"
+          id="in-progress-edit-${bookID}"
           value="In Progress"
         />In Progress</label
       >
-      <label class="fieldset__label" for="finished-edit"
+      <label class="fieldset__label" for="finished-edit-${bookID}"
         ><input
           class="fieldset__input"
           type="radio"
-          name="read-status-edit"
-          id="finished-edit"
+          name="read-status-edit-${bookID}"
+          id="finished-edit-${bookID}"
           value="Finished"
         />Finished</label
       >
@@ -152,7 +153,7 @@ function editBook() {
 
       cardConfirmChanges.appendChild(saveBtn);
       cardConfirmChanges.appendChild(cancelBtn);
-      event.target.closest('.card').appendChild(cardConfirmChanges);
+      card.appendChild(cardConfirmChanges);
       cardContent.children[3].hidden = true; // Hide read status element
       cardContent.appendChild(options);
       event.target.closest('.edit-btn').hidden = true; // Hide edit button
@@ -167,14 +168,14 @@ function saveEditOptions() {
   saveBtns.forEach(saveBtn => {
     saveBtn.addEventListener('click', e => {
       try {
-        let readStatusEdit = document.querySelector(
-          'input[name="read-status-edit"]:checked'
-        ).value;
         const card = e.target.closest('.card');
         const cardModify = card.firstElementChild;
-        const cardContent = card.children[1];
         cardModify.firstElementChild.hidden = false;
-        let bookID = card.getAttribute('data-book-id');
+        const cardContent = card.children[1];
+        const bookID = card.getAttribute('data-book-id');
+        let readStatusEdit = document.querySelector(
+          `input[name="read-status-edit-${bookID}"]:checked`
+        ).value;
         myLibrary[bookID]['readStatus'] = readStatusEdit;
         cardContent.children[3].innerHTML = `
         <p class="card__read-status--${readStatusEdit
@@ -185,8 +186,7 @@ function saveEditOptions() {
         cardContent.children[4].remove();
         e.target.parentElement.remove();
       } catch (err) {
-        console.log(err);
-        // alert((err = 'Please Select an Option'));
+        alert(err);
       }
     });
   });
