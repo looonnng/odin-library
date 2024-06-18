@@ -1,8 +1,3 @@
-// TODO : Add function to prevent/filter out duplicates
-// TODO: Fix bug to prevent user from creating multiple options by clicking edit button multiple times
-// TODO: Fix if user click on edit button and try to add a new book - the form will reset
-// Multiple cards edit -- each book need unique options
-
 const myLibrary = [];
 
 function Book(title, author, pages, readStatus) {
@@ -41,7 +36,7 @@ const cardsContainerEl = document.querySelector('#cards-container');
 document.querySelector('#new-book-form').addEventListener('submit', (event) => {
   event.preventDefault();
   addBookToLibrary();
-  event.target.reset();
+  event.target.reset(); // Clear form inputs
 });
 
 function createCard(book) {
@@ -76,7 +71,7 @@ function createCard(book) {
 
 // Event: Loop through array and display book
 function displayBook() {
-  cardsContainerEl.innerHTML = ''; // Clear cardContainer DOM element to prevent duplicate
+  cardsContainerEl.textContent = ''; // Clear cardContainer DOM element to prevent duplicate
   myLibrary.forEach((book) => createCard(book));
 }
 
@@ -105,6 +100,7 @@ function editBook() {
       const card = event.target.closest('.card');
       const bookID = card.getAttribute('data-book-id');
       const cardContent = card.lastChild;
+
       const options = document.createElement('div');
       const cardConfirmChanges = document.createElement('div');
       const saveBtn = document.createElement('button');
@@ -145,8 +141,8 @@ function editBook() {
         />Finished</label
       >
       `;
-      saveBtn.innerHTML = 'Save';
-      cancelBtn.innerHTML = 'Cancel';
+      saveBtn.textContent = 'Save';
+      cancelBtn.textContent = 'Cancel';
 
       cardConfirmChanges.appendChild(saveBtn);
       cardConfirmChanges.appendChild(cancelBtn);
@@ -164,27 +160,31 @@ function saveEditOptions() {
   const cancelBtns = document.querySelectorAll('.cancel-btn');
   saveBtns.forEach((saveBtn) => {
     saveBtn.addEventListener('click', (e) => {
-      try {
-        const card = e.target.closest('.card');
-        const cardModify = card.querySelector('.card-modify');
-        cardModify.firstElementChild.hidden = false;
-        const cardContent = card.querySelector('.card-content');
-        const bookID = card.getAttribute('data-book-id');
-        const readStatusEdit = document.querySelector(
-          `input[name="read-status-edit-${bookID}"]:checked`,
-        ).value;
-        myLibrary[bookID].readStatus = readStatusEdit;
-        cardContent.children[3].innerHTML = `
-        <p class="card__read-status--${readStatusEdit
-          .toLowerCase()
-          .replace(' ', '-')}">${readStatusEdit}</p>
-        `;
-        cardContent.children[3].hidden = false;
-        cardContent.children[4].remove();
-        e.target.parentElement.remove();
-      } catch (err) {
-        alert(err);
+      const card = e.target.closest('.card');
+      const cardModify = card.querySelector('.card-modify');
+      cardModify.firstElementChild.hidden = false;
+      const cardContent = card.querySelector('.card-content');
+      const bookID = card.getAttribute('data-book-id');
+
+      const readStatusEdit = document.querySelector(
+        `input[name="read-status-edit-${bookID}"]:checked`,
+      );
+
+      if (!readStatusEdit) {
+        cardModify.firstElementChild.hidden = true;
+        return;
       }
+
+      myLibrary[bookID].readStatus = readStatusEdit.value;
+      cardContent.children[3].innerHTML = `
+        <p class="card__read-status--${readStatusEdit.value
+          .toLowerCase()
+          .replace(' ', '-')}">${readStatusEdit.value}</p>
+        `;
+      cardContent.children[3].hidden = false;
+      cardContent.children[4].remove();
+      e.target.parentElement.remove();
+      cardModify.firstElementChild.hidden = false;
     });
   });
   cancelBtns.forEach((cancelBtn) => {
@@ -199,11 +199,3 @@ function saveEditOptions() {
     });
   });
 }
-
-/* 
-
-If user click to edit a card and 
-click a new edit on a diffrent card
-the original card will be null
-
-*/
