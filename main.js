@@ -14,24 +14,21 @@ function Book(title, author, pages, readStatus) {
 
 // Book should be an object instance of Book constructor
 function addBookToLibrary() {
-  let titleField = document.querySelector('#title').value;
-  let authorField = document.querySelector('#author').value;
-  let pagesField = document.querySelector('#pages').value;
-  let readStatus = document.querySelector(
-    'input[name="read-status"]:checked'
+  const titleField = document.querySelector('#title').value;
+  const authorField = document.querySelector('#author').value;
+  const pagesField = document.querySelector('#pages').value;
+  const readStatus = document.querySelector(
+    'input[name="read-status"]:checked',
   ).value;
 
   if (
     myLibrary.some(
-      book =>
-        book.title === titleField &&
-        book.author === authorField &&
-        book.pages === pagesField
+      (book) => book.title === titleField && book.author === authorField,
     )
   ) {
     alert('This Book has already been added!');
   } else {
-    let newBook = new Book(titleField, authorField, pagesField, readStatus);
+    const newBook = new Book(titleField, authorField, pagesField, readStatus);
     myLibrary.push(newBook);
     displayBook();
     removeBook();
@@ -40,8 +37,8 @@ function addBookToLibrary() {
 }
 
 // Event: Add book when user click add book button
-let cardsContainerEl = document.querySelector('#cards-container');
-document.querySelector('#new-book-form').addEventListener('submit', event => {
+const cardsContainerEl = document.querySelector('#cards-container');
+document.querySelector('#new-book-form').addEventListener('submit', (event) => {
   event.preventDefault();
   addBookToLibrary();
   event.target.reset();
@@ -80,7 +77,7 @@ function createCard(book) {
 // Event: Loop through array and display book
 function displayBook() {
   cardsContainerEl.innerHTML = ''; // Clear cardContainer DOM element to prevent duplicate
-  myLibrary.forEach(book => createCard(book));
+  myLibrary.forEach((book) => createCard(book));
 }
 
 function createNewID() {
@@ -90,8 +87,8 @@ function createNewID() {
 
 function removeBook() {
   const removeBtns = document.querySelectorAll('.remove-btn');
-  removeBtns.forEach(btn => {
-    btn.addEventListener('click', event => {
+  removeBtns.forEach((btn) => {
+    btn.addEventListener('click', (event) => {
       const card = event.target.closest('.card');
       const bookID = card.getAttribute('data-book-id');
       myLibrary.splice(bookID, 1);
@@ -103,8 +100,8 @@ function removeBook() {
 
 function editBook() {
   const editBtns = document.querySelectorAll('.edit-btn');
-  editBtns.forEach(btn => {
-    btn.addEventListener('click', event => {
+  editBtns.forEach((btn) => {
+    btn.addEventListener('click', (event) => {
       const card = event.target.closest('.card');
       const bookID = card.getAttribute('data-book-id');
       const cardContent = card.lastChild;
@@ -165,18 +162,18 @@ function editBook() {
 function saveEditOptions() {
   const saveBtns = document.querySelectorAll('.save-btn');
   const cancelBtns = document.querySelectorAll('.cancel-btn');
-  saveBtns.forEach(saveBtn => {
-    saveBtn.addEventListener('click', e => {
+  saveBtns.forEach((saveBtn) => {
+    saveBtn.addEventListener('click', (e) => {
       try {
         const card = e.target.closest('.card');
-        const cardModify = card.firstElementChild;
+        const cardModify = card.querySelector('.card-modify');
         cardModify.firstElementChild.hidden = false;
-        const cardContent = card.children[1];
+        const cardContent = card.querySelector('.card-content');
         const bookID = card.getAttribute('data-book-id');
-        let readStatusEdit = document.querySelector(
-          `input[name="read-status-edit-${bookID}"]:checked`
+        const readStatusEdit = document.querySelector(
+          `input[name="read-status-edit-${bookID}"]:checked`,
         ).value;
-        myLibrary[bookID]['readStatus'] = readStatusEdit;
+        myLibrary[bookID].readStatus = readStatusEdit;
         cardContent.children[3].innerHTML = `
         <p class="card__read-status--${readStatusEdit
           .toLowerCase()
@@ -190,11 +187,11 @@ function saveEditOptions() {
       }
     });
   });
-  cancelBtns.forEach(cancelBtn => {
-    cancelBtn.addEventListener('click', e => {
+  cancelBtns.forEach((cancelBtn) => {
+    cancelBtn.addEventListener('click', (e) => {
       const card = e.target.closest('.card');
-      const cardModify = card.firstElementChild;
-      const cardContent = card.children[1];
+      const cardModify = card.querySelector('.card-modify');
+      const cardContent = card.querySelector('.card-content');
       cardModify.firstElementChild.hidden = false;
       cardContent.children[3].hidden = false;
       cardContent.children[4].remove(); // Remove because options will be created in editBook()
