@@ -99,8 +99,10 @@ body {
   padding: 1em 0;
 }
 
-#cards-container {
-  gap: 4rem;
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap: 1rem;
 }
 
 .card-content {
@@ -111,6 +113,7 @@ body {
 }
 
 .card {
+  max-width: 500px;
   background-color: #3b5c6f;
   border-radius: 1rem;
 }
